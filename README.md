@@ -14,7 +14,7 @@ A Django-based weather application that displays weather information using the W
 - Responsive design
 - Modern UI with Bootstrap
 
-## Setup Instructions
+## Local Development Setup
 
 1. Clone the repository:
 ```bash
@@ -36,6 +36,9 @@ pip install -r requirements.txt
 4. Create a `.env` file in the root directory and add your WeatherAPI.com API key:
 ```
 WEATHERAPI_KEY=your_api_key_here
+DEBUG=True
+DJANGO_SECRET_KEY=your-secret-key-here
+DATABASE_URL=sqlite:///db.sqlite3
 ```
 You can get a free API key from [WeatherAPI.com](https://www.weatherapi.com/)
 
@@ -50,6 +53,25 @@ python manage.py runserver
 ```
 
 7. Visit http://127.0.0.1:8000/ in your browser
+
+## Deployment to Render.com
+
+1. Create a new Web Service on Render.com
+2. Connect your GitHub repository
+3. Configure the following settings:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn weather_project.wsgi:application`
+   - Python Version: 3.x
+
+4. Add the following environment variables in Render.com:
+   ```
+   WEATHERAPI_KEY=your_api_key_here
+   DEBUG=False
+   DJANGO_SECRET_KEY=your-secure-secret-key-here
+   DATABASE_URL=your-database-url  # Will be automatically set by Render.com
+   ```
+
+5. Deploy your application
 
 ## Usage
 
@@ -70,6 +92,9 @@ python manage.py runserver
 - Bootstrap 5.3.0
 - WeatherAPI.com API
 - python-dotenv for environment variables
+- Gunicorn for production server
+- Whitenoise for static files
+- dj-database-url for database configuration
 
 ## Contributing
 
