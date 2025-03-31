@@ -1,1 +1,1 @@
-web: gunicorn weather_project.wsgi:application --log-file - 
+web: cd /opt/render/project/src && gunicorn --chdir /opt/render/project/src weather_project.wsgi:application --log-file - 
