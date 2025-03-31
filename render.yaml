@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: weather-app-django
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn weather_project.wsgi:application --log-file -
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: WEATHERAPI_KEY
+        sync: false
+      - key: DEBUG
+        value: False
+      - key: DJANGO_SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false 
